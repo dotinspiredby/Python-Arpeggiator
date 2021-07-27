@@ -10,9 +10,9 @@ class Arpeggiator:
         self.x_patterns = num_of_patterns
         self.y_voices = voices
         self.req = len(input_notes)
-        self.container = self.prepare_notes(input_notes)
+        self.container = self.__prepare_notes(input_notes)
         self.chce = []
-        self.make_choice()
+        self.__make_choice()
 
         try:
             self.time_ratio = list(map(int, ratio.split(":")))
@@ -22,24 +22,24 @@ class Arpeggiator:
             else:
                 self.time_ratio.append(4)
         except ValueError:
-            time_ratio = []
+            self.time_ratio = []
             for _ in range(self.y_voices):
-                time_ratio.append(4)
+                self.time_ratio.append(4)
 
     @staticmethod
-    def prepare_notes(input_notes):
+    def __prepare_notes(input_notes):
         req = ToneRow(input_notes).noteNames()
         combinations = list(permutations(req))
         return combinations
 
-    def make_choice(self):
+    def __make_choice(self):
         for _ in range(self.x_patterns):
             measure = []
             for _ in range(self.y_voices):
                 measure.append(choice(self.container))
             self.chce.append(measure)
 
-    def adjust_with_ratio(self):
+    def __adjust_with_ratio(self):
         notes_total = self.x_patterns * self.req  # by max versus value
         note_counter = []
         for rate in self.time_ratio:
@@ -59,7 +59,7 @@ class Arpeggiator:
         return chce
 
     def process(self, duration_type, file_type=None):
-        chce = self.adjust_with_ratio()
+        chce = self.__adjust_with_ratio()
 
         sc = stream.Score()
 
@@ -85,4 +85,4 @@ class Arpeggiator:
 
 
 n = Arpeggiator([0, 2, 4, 5, 7, 9, 11], 19, 4, "17:13:19:11")  # example
-n.process('half', 'midi')                                # might be quarter, 16th or eighth, filetype can be "midi" or None by default
+n.process('half','midi')                                # might be quarter, 16th or eighth, filetype can be "midi" or None by default                              # might be quarter, 16th or eighth, filetype can be "midi" or None by default
