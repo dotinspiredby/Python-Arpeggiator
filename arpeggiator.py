@@ -85,4 +85,4 @@ class Arpeggiator:
 
 
 n = Arpeggiator([0, 2, 4, 5, 7, 9, 11], 19, 4, "17:13:19:11")  # example
-n.process('half','midi')                                # might be quarter, 16th or eighth, filetype can be "midi" or None by default                              # might be quarter, 16th or eighth, filetype can be "midi" or None by default
+n.process('half','midi')                                # might be quarter, 16th or eighth, filetype can be "midi" or None by default                           
